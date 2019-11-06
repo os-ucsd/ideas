@@ -1,0 +1,19 @@
+name: New Idea Workflow
+on:
+  issues:
+    types: [opened]  
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Slack Notify
+        uses: rtCamp/action-slack-notify@v1.0.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: leads
+          SLACK_ICON: "https://avatars0.githubusercontent.com/u/51001618?v=4"
+          SLACK_TITLE: "New idea in the OS@UCSD Ideas repository!"        
+          SLACK_MESSAGE: " '${{ github.event.issue.title }}' from ${{ github.event.issue.user.login }}. ${{ github.event.issue.html_url }} "
